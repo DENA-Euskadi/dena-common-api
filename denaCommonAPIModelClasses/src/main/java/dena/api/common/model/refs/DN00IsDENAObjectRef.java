@@ -1,0 +1,35 @@
+package dena.api.common.model.refs;
+
+import dena.api.common.model.DN00IsDENAModelObject;
+import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
+import r01f.facets.HasOID;
+import r01f.types.CanBeRepresentedAsString;
+
+public interface DN00IsDENAObjectRef<O extends DN00IsDENAPersistableObjectOID>
+		 extends HasOID<O>,
+		 		 CanBeRepresentedAsString,
+		 		 DN00IsDENAModelObject {
+/////////////////////////////////////////////////////////////////////////////////////////
+//	
+/////////////////////////////////////////////////////////////////////////////////////////	
+	public default boolean is(final DN00IsDENAObjectRef<O> other) {
+		return this.equals(other);
+	}
+	public default boolean isNOT(final DN00IsDENAObjectRef<O> other) {
+		return !this.is(other);
+	}
+	public default boolean is(final O other) {
+		return this.getOid() != null && this.getOid().is(other);
+	}
+/////////////////////////////////////////////////////////////////////////////////////////
+//	FACTORY	
+/////////////////////////////////////////////////////////////////////////////////////////	
+	/**
+	 * A factory to create refs to DENA objects from their OID
+	 * @param <O>
+	 * @param <R>
+	 */
+	public interface DN00DENAObjectRefFactory<O extends DN00IsDENAPersistableObjectOID,R extends DN00IsDENAObjectRef<O>> {
+		public R createRefFrom(final O oid);
+	}
+}

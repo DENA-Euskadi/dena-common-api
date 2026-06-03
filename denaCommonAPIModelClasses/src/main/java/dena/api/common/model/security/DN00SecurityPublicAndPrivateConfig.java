@@ -1,0 +1,16 @@
+package dena.api.common.model.security;
+
+
+import lombok.experimental.Accessors;
+
+
+@Accessors(prefix="_")
+public class DN00SecurityPublicAndPrivateConfig 
+  implements DN00IsDENASecurityConfig {
+
+//////////////////////////////////////////////////////////////////////////////
+//   FIELDS
+//////////////////////////////////////////////////////////////////////////////
+
+
+}
