@@ -2,6 +2,7 @@ package dena.api.common.model.oids.person;
 
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAObjectOID;
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.guids.JavaOIDDispenser;
 import r01f.objectstreamer.annotations.MarshallType;
@@ -24,7 +25,7 @@ public abstract class DN00PersonOIDs {
 //	Person OID
 /////////////////////////////////////////////////////////////////////////////////////////
 	@MarshallType(as="personOid")
-	public record DN00PersonOID(String id)
+	public record DN00PersonOID(@Getter String id)
 	   implements DN00IsPersonPersistableObjectOID {
 
         public static DN00PersonOID forId(final String id) {
@@ -45,7 +46,7 @@ public abstract class DN00PersonOIDs {
 //	
 /////////////////////////////////////////////////////////////////////////////////////////	
 	@MarshallType(as="personIdChangeOid")
-	public record DN00PersonIDChangeOID(String id) 
+	public record DN00PersonIDChangeOID(@Getter String id) 
 	   implements DN00IsPersonPersistableObjectOID {
 
         public static DN00PersonIDChangeOID forId(final String id) {

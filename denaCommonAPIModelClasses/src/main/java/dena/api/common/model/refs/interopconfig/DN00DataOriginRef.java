@@ -24,6 +24,9 @@ public class DN00DataOriginRef
 	public DN00DataOriginRef() {
 		super();
 	}
+	public DN00DataOriginRef(final DN00DataOriginRef other) {
+		super(other);
+	}
 	public DN00DataOriginRef(final DN00DataOriginOID oid,final DN00DataOriginID id) {
 		super(oid,id);
 	}

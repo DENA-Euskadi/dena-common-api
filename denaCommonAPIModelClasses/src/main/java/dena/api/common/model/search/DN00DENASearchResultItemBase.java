@@ -37,7 +37,7 @@ public abstract class DN00DENASearchResultItemBase<O extends DN00IsDENAPersistab
 		super(modelObjectType);
 	}
 	public DN00DENASearchResultItemBase(final Class<M> modelObjectType,
-									final O oid) {
+										final O oid) {
 		super(modelObjectType);
 		_oid = oid;
 	}

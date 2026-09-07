@@ -2,6 +2,7 @@ package dena.api.common.model.oids.s3filestore;
 
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAObjectOID;
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.guids.JavaOIDDispenser;
 import r01f.objectstreamer.annotations.MarshallType;
@@ -24,7 +25,7 @@ public abstract class DN00S3FileStoreOIDs {
 //	S3 File Store Item OID
 /////////////////////////////////////////////////////////////////////////////////////////
 	@MarshallType(as="s3FileStoreItemOid")
-	public record DN00S3FileStoreItemOID(String id)
+	public record DN00S3FileStoreItemOID(@Getter String id)
 	   implements DN00IsS3FileStorePersistableObjectOID {
 
         public static DN00S3FileStoreItemOID forId(final String id) {

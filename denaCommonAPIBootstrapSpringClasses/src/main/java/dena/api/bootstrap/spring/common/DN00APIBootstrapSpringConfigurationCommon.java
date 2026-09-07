@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 
 import dena.api.common.context.DN00SecurityContextProviderMockImpl;
 import dena.common.internal.DN00AppCodes;
@@ -13,6 +14,7 @@ import r01f.model.annotations.ModelObjectsMarshaller;
 import r01f.objectstreamer.Marshaller;
 import r01f.objectstreamer.MarshallerBuilder;
 import r01f.securitycontext.SecurityContext;
+import r01f.services.bootstrap.annotations.api.SecurityContextProviderForSystemUser;
 import r01f.spring.IsSpringConfiguration;
 import r01f.spring.annotation.Prototype;
 
@@ -67,5 +69,27 @@ public class DN00APIBootstrapSpringConfigurationCommon
 	public SecurityContext securityContext(final ObjectProvider<Provider<SecurityContext>> providerObjectProvider) {
 		Provider<SecurityContext> objFactory = providerObjectProvider.getObject(); 
 		return objFactory.get();
-	}	   
+	}	
+	
+	
+////////////////////////////////////////////////////////////////////
+/// SYSTEM SECURITY CONTEXT
+////////////////////////////////////////////////////////////////////
+	@Bean 
+	@SecurityContextProviderForSystemUser // 
+	public Provider<SecurityContext> systemSecurityContextProvider(){		
+		return new DN00SecurityContextProviderMockImpl();  //todo
+	}
+	
+	@Bean 
+	@Lazy
+	@Scope("prototype") 
+	@SecurityContextProviderForSystemUser //
+	public SecurityContext systemSecurityContext(final  @SecurityContextProviderForSystemUser    ObjectProvider<Provider<SecurityContext>> providerObjectProvider) {
+		Provider<SecurityContext> provider = providerObjectProvider.getObject();
+		return provider.get();
+	}
+
+	
+	
 }

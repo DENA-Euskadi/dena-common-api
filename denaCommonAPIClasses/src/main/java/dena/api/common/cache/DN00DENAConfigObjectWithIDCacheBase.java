@@ -6,7 +6,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import dena.api.common.interfaces.DN00IsCRUDServicesForDENAPersistablObjectWithID;
-import dena.api.common.interfaces.DN00IsFindServicesForDENAPersistableObjectWithID;
+import dena.api.common.interfaces.DN00IsFindServicesForDENAPersistableObject;
 import dena.api.common.model.DN00IsDENAPersistableObjectWithID;
 import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAPersistableObjectID;
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
@@ -16,7 +16,7 @@ import jakarta.inject.Provider;
 import r01f.securitycontext.SecurityContext;
 
 public abstract class DN00DENAConfigObjectWithIDCacheBase<O extends DN00IsDENAPersistableObjectOID,I extends DN00IsDENAPersistableObjectID<O>,M extends DN00IsDENAPersistableObjectWithID<O,I>> 
-			  extends DN00DENAConfigObjectCacheBase<O,M> {
+			  extends DN00DENAObjectCacheBase<O,M> {
 /////////////////////////////////////////////////////////////////////////////////////////
 //	FIELDS
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -28,11 +28,11 @@ public abstract class DN00DENAConfigObjectWithIDCacheBase<O extends DN00IsDENAPe
 //	CONSTRUCTOR
 /////////////////////////////////////////////////////////////////////////////////////////
 	protected <CRUD extends DN00IsCRUDServicesForDENAPersistablObjectWithID<O,I,M>,
-			   FIND extends DN00IsFindServicesForDENAPersistableObjectWithID<O,I,M>> DN00DENAConfigObjectWithIDCacheBase(final Class<M> modelObjectType,
-					   																					   				 // the system security context provider needed for the cache
-																										   				 final Provider<SecurityContext> securityContextProvider,
-																										   				 // the CRUD & FIND services
-																										   				 final CRUD crud,final FIND find) {
+			   FIND extends DN00IsFindServicesForDENAPersistableObject<O,M>> DN00DENAConfigObjectWithIDCacheBase(final Class<M> modelObjectType,
+					   																					   		 // the system security context provider needed for the cache
+																										   		 final Provider<SecurityContext> securityContextProvider,
+																										   		 // the CRUD & FIND services
+																										   		 final CRUD crud,final FIND find) {
 		super(modelObjectType,
 			  securityContextProvider,
 			  crud,find);

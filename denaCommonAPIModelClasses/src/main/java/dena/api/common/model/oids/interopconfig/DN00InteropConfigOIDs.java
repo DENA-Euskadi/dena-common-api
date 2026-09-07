@@ -2,8 +2,10 @@ package dena.api.common.model.oids.interopconfig;
 
 import dena.api.common.model.config.DN00DENAConfigOIDs.DN00IsDENAConfigObjectOID;
 import dena.api.common.model.config.DN00DENAConfigOIDs.DN00IsDENAConfigPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.guids.JavaOIDDispenser;
+import r01f.model.catalogable.CatalogableOIDs.CatalogableObjectOID;
 import r01f.objectstreamer.annotations.MarshallType;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
@@ -24,8 +26,9 @@ public abstract class DN00InteropConfigOIDs {
 //	DataType OIDs
 /////////////////////////////////////////////////////////////////////////////////////////
 	@MarshallType(as="dataTypeOid")
-	public record DN00DataTypeOID(String id)
-	   implements DN00IsInteropConfigPersistableObjectOID {
+	public record DN00DataTypeOID(@Getter String id)
+	   implements DN00IsInteropConfigPersistableObjectOID,
+				  CatalogableObjectOID {
 
         public static DN00DataTypeOID forId(final String id) {
             return new DN00DataTypeOID(id);
@@ -45,7 +48,7 @@ public abstract class DN00InteropConfigOIDs {
 //	DataOrigin OIDs
 /////////////////////////////////////////////////////////////////////////////////////////
 	@MarshallType(as="dataOriginOid")
-	public record DN00DataOriginOID(String id)
+	public record DN00DataOriginOID(@Getter String id)
 	   implements DN00IsInteropConfigPersistableObjectOID {
 
         public static DN00DataOriginOID forId(final String id) {

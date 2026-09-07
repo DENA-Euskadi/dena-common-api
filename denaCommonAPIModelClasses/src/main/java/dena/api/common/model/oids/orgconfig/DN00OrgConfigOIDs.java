@@ -2,6 +2,7 @@ package dena.api.common.model.oids.orgconfig;
 
 import dena.api.common.model.config.DN00DENAConfigOIDs.DN00IsDENAConfigObjectOID;
 import dena.api.common.model.config.DN00DENAConfigOIDs.DN00IsDENAConfigPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.guids.JavaOIDDispenser;
 import r01f.guids.OID;
@@ -25,7 +26,7 @@ public abstract class DN00OrgConfigOIDs {
 //	OrgAdmin / OrgAdminGroup OIDs
 /////////////////////////////////////////////////////////////////////////////////////////
 	@MarshallType(as="orgAdminOid")
-	public record DN00OrgAdminGroupOID(String id)
+	public record DN00OrgAdminGroupOID(@Getter String id)
 	   implements DN00IsOrgConfigPersistableObjectOID {
 
         public static DN00OrgAdminGroupOID forId(final String id) {
@@ -43,7 +44,7 @@ public abstract class DN00OrgConfigOIDs {
 		}
 	}
 	@MarshallType(as="orgAdminOid")
-	public record DN00OrgAdminOID(String id)
+	public record DN00OrgAdminOID(@Getter String id)
 	   implements DN00IsOrgConfigPersistableObjectOID {
 
         public static DN00OrgAdminOID forId(final String id) {

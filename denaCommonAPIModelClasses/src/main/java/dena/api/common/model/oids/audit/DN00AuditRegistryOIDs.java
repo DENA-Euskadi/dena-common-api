@@ -2,6 +2,7 @@ package dena.api.common.model.oids.audit;
 
 import dena.api.common.model.config.DN00DENAConfigOIDs.DN00IsDENAConfigObjectOID;
 import dena.api.common.model.config.DN00DENAConfigOIDs.DN00IsDENAConfigPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.guids.JavaOIDDispenser;
 import r01f.objectstreamer.annotations.MarshallType;
@@ -23,18 +24,18 @@ public abstract class DN00AuditRegistryOIDs {
 /////////////////////////////////////////////////////////////////////////////////////////
 //	Audit Registry OIDs
 /////////////////////////////////////////////////////////////////////////////////////////
-	@MarshallType(as="auditRegistryOid")
-	public record DN00AuditRegistryOID(String id)
+	@MarshallType(as="auditEntryOid")
+	public record DN00AuditEntryOID(@Getter String id)
 	   implements DN00IsAuditRegistryPersistableObjectOID {
 
-        public static DN00AuditRegistryOID forId(final String id) {
-            return new DN00AuditRegistryOID(id);
+        public static DN00AuditEntryOID forId(final String id) {
+            return new DN00AuditEntryOID(id);
         }
-        public static DN00AuditRegistryOID valueOf(final String str) {
-            return new DN00AuditRegistryOID(str);
+        public static DN00AuditEntryOID valueOf(final String str) {
+            return new DN00AuditEntryOID(str);
         }
-        public static DN00AuditRegistryOID supply() {
-     		return DN00AuditRegistryOID.forId(JavaOIDDispenser.generateGUID());
+        public static DN00AuditEntryOID supply() {
+     		return DN00AuditEntryOID.forId(JavaOIDDispenser.generateGUID());
      	}
         @Override
 		public String toString() {

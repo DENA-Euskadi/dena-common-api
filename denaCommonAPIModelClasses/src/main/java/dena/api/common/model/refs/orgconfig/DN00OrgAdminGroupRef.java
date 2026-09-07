@@ -24,6 +24,9 @@ public class DN00OrgAdminGroupRef
 	public DN00OrgAdminGroupRef() {
 		super();
 	}
+	public DN00OrgAdminGroupRef(final DN00OrgAdminGroupRef other) {
+		super(other);
+	}
 	public DN00OrgAdminGroupRef(final DN00OrgAdminGroupOID oid,final DN00OrgAdminGroupID id) {
 		super(oid,id);
 	}

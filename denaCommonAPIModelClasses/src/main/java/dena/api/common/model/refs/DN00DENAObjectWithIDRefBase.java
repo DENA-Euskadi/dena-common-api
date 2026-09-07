@@ -27,6 +27,10 @@ public abstract class DN00DENAObjectWithIDRefBase<O extends DN00IsDENAPersistabl
     public DN00DENAObjectWithIDRefBase() {
 		// default no-args constructor
 	}
+    public <R extends DN00DENAObjectWithIDRefBase<O,I>> DN00DENAObjectWithIDRefBase(final R other) {
+    	super(other);
+		_id = other.getId();
+    }
     public DN00DENAObjectWithIDRefBase(final O oid) {
     	super(oid);
     }

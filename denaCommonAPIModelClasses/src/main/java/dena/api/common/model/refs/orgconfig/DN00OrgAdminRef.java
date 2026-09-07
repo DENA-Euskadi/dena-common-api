@@ -35,6 +35,10 @@ public class DN00OrgAdminRef
 	public DN00OrgAdminRef() {
 		super();
 	}
+	public DN00OrgAdminRef(final DN00OrgAdminRef other) {
+		super(other);
+		_dir3Id = other.getDir3Id();
+	}
 	public DN00OrgAdminRef(final DN00OrgAdminOID oid,final DN00OrgAdminID id,
 						   final DN00DIR3OrgID dir3Id) {
 		super(oid,id);

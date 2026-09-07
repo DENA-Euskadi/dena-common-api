@@ -1,7 +1,7 @@
 package dena.api.common.model.oids;
 
 import lombok.NoArgsConstructor;
-import r01f.guids.OID;
+import r01f.guids.OIDTyped;
 import r01f.guids.PersistableObjectOID;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
@@ -10,7 +10,7 @@ public abstract class DN00CommonOIDs {
 //	BASE INTERFACES
 /////////////////////////////////////////////////////////////////////////////////////////
 	public interface DN00IsDENAObjectOID
-		     extends OID {
+		     extends OIDTyped<String> {
 
 		public String id();
 

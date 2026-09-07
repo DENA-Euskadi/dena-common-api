@@ -29,6 +29,9 @@ public class DN00PersonRef
 	public DN00PersonRef() {
 		super();
 	}
+	public DN00PersonRef(final DN00PersonRef other) {
+		super(other);
+	}
 	public DN00PersonRef(final DN00PersonOID oid,final DN00PersonID id) {
 		super(oid,id);
 	}

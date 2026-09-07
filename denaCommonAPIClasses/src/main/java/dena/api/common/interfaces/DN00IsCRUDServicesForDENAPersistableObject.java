@@ -6,7 +6,7 @@ import r01f.services.interfaces.CRUDServicesForModelObject;
 
 public interface DN00IsCRUDServicesForDENAPersistableObject<O extends DN00IsDENAPersistableObjectOID,M extends DN00IsDENAPersistableObject<O>>
 		 extends CRUDServicesForModelObject<O,M>,
-		 		 DN00IsDENAPersistenceServiceInterface{
+		 		 DN00IsDENAPersistenceServiceInterface {
 /////////////////////////////////////////////////////////////////////////////////////////
 //
 /////////////////////////////////////////////////////////////////////////////////////////

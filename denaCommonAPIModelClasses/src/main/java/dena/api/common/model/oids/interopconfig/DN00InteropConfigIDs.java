@@ -5,6 +5,7 @@ import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAPersistableObjectID;
 import dena.api.common.model.oids.interopconfig.DN00InteropConfigOIDs.DN00DataOriginOID;
 import dena.api.common.model.oids.interopconfig.DN00InteropConfigOIDs.DN00DataTypeOID;
 import dena.api.common.model.oids.interopconfig.DN00InteropConfigOIDs.DN00IsInteropConfigPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.objectstreamer.annotations.MarshallType;
 
@@ -40,6 +41,9 @@ public abstract class DN00InteropConfigIDs {
 			return this.id;
 		}
 	}
+/////////////////////////////////////////////////////////////////////////////////////////
+//	
+/////////////////////////////////////////////////////////////////////////////////////////	
 	@MarshallType(as="dataOriginId")
 	public record DN00DataOriginID(String id)
 	   implements DN00IsInteropConfigPersistableObjectID<DN00DataOriginOID> {
@@ -49,6 +53,23 @@ public abstract class DN00InteropConfigIDs {
         }
         public static DN00DataOriginID valueOf(final String str) {
             return new DN00DataOriginID(str);
+        }
+        @Override
+		public String toString() {
+        	return this.id;
+        }
+	}
+	@MarshallType(as="dataOriginInstanceID")
+	public record DN00DataOriginInstanceID(@Getter String id)
+	   implements DN00IsInteropConfigObjectID {
+
+		public static final DN00DataOriginInstanceID DEFAULT = DN00DataOriginInstanceID.forId("DEFAULT");
+				
+        public static DN00DataOriginInstanceID forId(final String id) {
+            return new DN00DataOriginInstanceID(id);
+        }
+        public static DN00DataOriginInstanceID valueOf(final String str) {
+            return new DN00DataOriginInstanceID(str);
         }
         @Override
 		public String toString() {

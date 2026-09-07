@@ -22,6 +22,9 @@ public class DN00DataTypeRef
 	public DN00DataTypeRef() {
 		super();
 	}
+	public DN00DataTypeRef(final DN00DataTypeRef other) {
+		super(other);
+	}
 	public DN00DataTypeRef(final DN00DataTypeOID oid,final DN00DataTypeID id) {
 		super(oid,id);
 	}

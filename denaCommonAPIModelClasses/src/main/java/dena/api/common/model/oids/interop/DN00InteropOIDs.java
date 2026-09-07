@@ -1,8 +1,9 @@
-	package dena.api.common.model.interop.oids;
+	package dena.api.common.model.oids.interop;
 
 
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAObjectOID;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import r01f.guids.JavaOIDDispenser;
 import r01f.objectstreamer.annotations.MarshallType;
@@ -20,7 +21,7 @@ public abstract class DN00InteropOIDs {
 //  Message Correlation OID
 /////////////////////////////////////////////////////////////////////////////////////////
 	@MarshallType(as="messageCorrelationOID")
-	public record DN00MessageCorrelationOID(String id)
+	public record DN00MessageCorrelationOID(@Getter String id)
 	   implements DN00IsInteropObjectOID {
 		
 		public static DN00MessageCorrelationOID forId(final String id) {

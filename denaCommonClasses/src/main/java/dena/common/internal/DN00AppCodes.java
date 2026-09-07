@@ -92,19 +92,19 @@ public class DN00AppCodes {
 	public static final String AUDIT_CONSUMER_MOD_STR = "audit.consumer";
 	public static final String AUDIT_CONSUMER_FQN =  CORE_APPCODE_STR + "." + AUDIT_CONSUMER_MOD_STR;
 	public static final CoreModule AUDIT_CONSUMER_MOD = CoreModule.forId(AUDIT_CONSUMER_MOD_STR);
-	
-/////////////////////////////////////////////////////////////////////////////////////////
-//  SECURITY
-/////////////////////////////////////////////////////////////////////////////////////////
-	public static final CoreAppCode SECURITY_SERVICES_EXTERNAL_APPCODE = CORE_APPCODE;
-	public static final CoreAppCode SECURITY_SERVICES_WEB_AUTHN_APPCODE = CORE_APPCODE;
 
-////////// SECURITY SERVICES EXTERNAL
-	public static final String SECURITY_SERVICES_EXTERNAL_MOD_STR = "security.services.external";
-	public static final String SECURITY_SERVICES_EXTERNAL_FQN =  CORE_APPCODE_STR + "." + SECURITY_SERVICES_EXTERNAL_MOD_STR;
-	public static final CoreModule SECURITY_SERVICES_EXTERNAL_MOD = CoreModule.forId(SECURITY_SERVICES_EXTERNAL_MOD_STR);
+/////////////////////////////////////////////////////////////////////////////////////////
+// SECURITY
+/////////////////////////////////////////////////////////////////////////////////////////
+	public static final CoreAppCode SECURITY_SERVICES_PERSON_USER_APPCODE = CORE_APPCODE;
+	public static final CoreAppCode SECURITY_SERVICES_WEB_AUTHN_APPCODE = CORE_APPCODE;
 	
-///////////	SECURITY WEBAUTHN
+	//////////SECURITY SERVICES EXTERNAL
+	public static final String SECURITY_SERVICES_PERSON_USER_MOD_STR = "security.services.person.user";
+	public static final String SECURITY_SERVICES_PERSON_USER_FQN =  CORE_APPCODE_STR + "." + SECURITY_SERVICES_PERSON_USER_MOD_STR;
+	public static final CoreModule SECURITY_SERVICES_PERSON_USER_MOD = CoreModule.forId(SECURITY_SERVICES_PERSON_USER_MOD_STR);
+	
+	///////////	SECURITY WEBAUTHN
 	public static final String SECURITY_SERVICES_WEB_AUTHN_MOD_STR = "security.services.webauthn";
 	public static final String  SECURITY_SERVICES_WEB_AUTHN_FQN =  CORE_APPCODE_STR + "." + SECURITY_SERVICES_WEB_AUTHN_MOD_STR;
 	public static final CoreModule  SECURITY_SERVICES_WEB_AUTHN_MOD = CoreModule.forId(SECURITY_SERVICES_WEB_AUTHN_MOD_STR);
@@ -114,6 +114,17 @@ public class DN00AppCodes {
 	public static final String SECURITY_CLIENT_INSTALLMENT_FQN =  CORE_APPCODE_STR + "." + SECURITY_CLIENT_INSTALLMENT_MOD_STR;
 	public static final CoreModule SECURITY_CLIENT_INSTALLMENT_MOD = CoreModule.forId(SECURITY_CLIENT_INSTALLMENT_MOD_STR);
 
+/////////////////////////////////////////////////////////////////////////////////////////
+//  PASSKEY
+/////////////////////////////////////////////////////////////////////////////////////////
+	public static final String PASSKEY_MOD_STR = "passkey";
+	public static final String PASSKEY_FQN =  CORE_APPCODE_STR + "." + PASSKEY_MOD_STR;
+	public static final CoreModule PASSKEY_MOD = CoreModule.forId(PASSKEY_MOD_STR);
+	
+	public static final String LABELING_MOD_STR = "labeling";
+	public static final String LABELING_FQN =  CORE_APPCODE_STR + "." + LABELING_MOD_STR;
+	public static final CoreModule LABELING_MOD = CoreModule.forId(LABELING_MOD_STR);
+	
 /////////////////////////////////////////////////////////////////////////////////////////
 //	PERSON CLIENT DEVICE
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -126,15 +137,8 @@ public class DN00AppCodes {
 /////////////////////////////////////////////////////////////////////////////////////////
 //	ADMIN PROXY
 /////////////////////////////////////////////////////////////////////////////////////////
-////////// ADMIN PROXY PERSON SYNC	
-	public static final String ADMINPROXY_PERSON_SYNC_MOD_STR = "adminproxy.person.sync";	
-	public static final String ADMINPROXY_PERSON_SYNC_FQN =  CORE_APPCODE_STR + "." + ADMINPROXY_PERSON_SYNC_MOD_STR;
-	public static final CoreModule ADMINPROXY_PERSON_SYNC_MOD = CoreModule.forId(ADMINPROXY_PERSON_SYNC_MOD_STR);	
-	
-/////////////////////////////////////////////////////////////////////////////////////////
-//  CLIENT RESOURCES
-/////////////////////////////////////////////////////////////////////////////////////////
-	public static final String INTEROP_CLIENTRESOURCES_MOD_STR = "interop.client.resources";
-	public static final String INTEROP_CLIENTRESOURCES_FQN =  CORE_APPCODE_STR + "." + INTEROP_CLIENTRESOURCES_MOD_STR;
-	public static final CoreModule INTEROP_CLIENTRESOURCES_MOD = CoreModule.forId(INTEROP_CLIENTRESOURCES_MOD_STR);
+////////// ADMIN PROXY	
+	public static final String ADMINPROXY_MOD_STR = "adminproxy.person.sync";	
+	public static final String ADMINPROXY_FQN =  CORE_APPCODE_STR + "." + ADMINPROXY_MOD_STR;
+	public static final CoreModule ADMINPROXY_MOD = CoreModule.forId(ADMINPROXY_MOD_STR);
 }

@@ -1,24 +1,17 @@
 package dena.api.common.delegates;
 
-import com.google.common.reflect.TypeToken;
-
 import dena.api.common.interfaces.DN00IsCRUDServicesForDENAPersistablObjectWithID;
 import dena.api.common.model.DN00IsDENAPersistableObjectWithID;
 import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAPersistableObjectID;
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
+import dena.api.common.model.refs.DN00IsDENAObjectWithIDRef;
 import jakarta.inject.Provider;
-import r01f.aspects.interfaces.dirtytrack.DirtyStateTrackable;
-import r01f.generics.TypeRef;
-import r01f.model.persistence.CRUDResult;
-import r01f.model.persistence.PersistenceException;
-import r01f.model.persistence.PersistenceOperationResult;
 import r01f.objectstreamer.Marshaller;
 import r01f.securitycontext.SecurityContext;
-import r01f.services.api.delegates.ClientAPIDelegateForModelObjectCRUDServices;
-import r01f.services.api.delegates.ClientAPIModelObjectChangesTrack;
+import r01f.services.api.delegates.ClientAPIDelegateForModelObjectWithIDCRUDServices;
 
 public abstract class DN00ClientAPIDelegateForDENAObjectWithIDCRUDServicesBase<O extends DN00IsDENAPersistableObjectOID,I extends DN00IsDENAPersistableObjectID<O>,M extends DN00IsDENAPersistableObjectWithID<O,I>>
-	     	  extends ClientAPIDelegateForModelObjectCRUDServices<O,M> {
+	     	  extends ClientAPIDelegateForModelObjectWithIDCRUDServices<O,I,M> {
 /////////////////////////////////////////////////////////////////////////////////////////
 //	CONSTRUCTOR
 /////////////////////////////////////////////////////////////////////////////////////////	
@@ -30,74 +23,54 @@ public abstract class DN00ClientAPIDelegateForDENAObjectWithIDCRUDServicesBase<O
 			  services);
 	 }
 /////////////////////////////////////////////////////////////////////////////////////////
-//
-/////////////////////////////////////////////////////////////////////////////////////////
-	/**
-	 * Loads an object using it's id
-	 * @param id
-	 * @return
-	 */
-	public M loadById(final I id) {
-		CRUDResult<M> result = this.getServiceProxyAs(new TypeToken<DN00IsCRUDServicesForDENAPersistablObjectWithID<O,I,M>>() { /* nothing */ })
-				   				   .loadById(this.getSecurityContext(),
-							 				 id);
-		M outRecord = result.getOrThrow();
-		if (outRecord instanceof DirtyStateTrackable) {
-			ClientAPIModelObjectChangesTrack.startTrackingChangesOnLoaded(outRecord);
-		}
-		return outRecord;
-	}
-	/**
-	 * Loads an object using it's id
-	 * @param id
-	 * @return
-	 */
-	public M loadByIdOrNull(final I id) {
-		M outRecord = null;
-		try {
-			outRecord = this.loadById(id);
-		} catch (PersistenceException persistEx) {
-			if (!persistEx.isEntityNotFound()) throw persistEx;
-		}
-		return outRecord;
-	}
-/////////////////////////////////////////////////////////////////////////////////////////
 //	
-/////////////////////////////////////////////////////////////////////////////////////////	
-	/**
-	 * Checks if an object exists using it's id
-	 * @param id
-	 * @return
-	 */
-	public boolean exists(final I id) {  // TypeToken vs TypeREf [todo] checks.
-		PersistenceOperationResult<Boolean> result = this.getServiceProxyAs(new TypeToken<DN00IsCRUDServicesForDENAPersistablObjectWithID<O,I,M>>() { /* nothing */ })
-														 .exists(this.getSecurityContext(),
-							 				 					 id);	
-		return result.getOrThrow();
-	}
 /////////////////////////////////////////////////////////////////////////////////////////
-//	
-/////////////////////////////////////////////////////////////////////////////////////////	
 	/**
-	 * Gets the id of an object using it's oid
-	 * @param oid
+	 * Load by reference
+	 * @param ref
 	 * @return
 	 */
-	public I getIdOf(final O oid) {
-		PersistenceOperationResult<I> result = this.getServiceProxyAs(new TypeRef<DN00IsCRUDServicesForDENAPersistablObjectWithID<O,I,M>>() { /* nothing */ })
-												   .getIdOf(this.getSecurityContext(),
-														    oid);	
-		return result.getOrThrow();
+	public <R extends DN00IsDENAObjectWithIDRef<O,I>> M load(final R ref) {
+		if (ref == null || ref.containsNeitherOidNorId()) throw new IllegalArgumentException("A ref with either an oid or an id is required");
+		
+		M outObj = null;
+		if (ref.containsOid()) {
+			outObj = this.load(ref.getOid());
+		} else if (ref.containsId()) {
+			outObj = this.loadById(ref.getId());
+		}
+		return outObj;
 	}
 	/**
-	 * Gets the oid of an object using it's id
-	 * @param oid
+	 * Deletes by ref
+	 * @param ref
 	 * @return
 	 */
-	public O getOidOf(final I id) {
-		PersistenceOperationResult<O> result = this.getServiceProxyAs(new TypeRef<DN00IsCRUDServicesForDENAPersistablObjectWithID<O,I,M>>() { /* nothing */ })
-												   .getOidOf(this.getSecurityContext(),
-														     id);	
-		return result.getOrThrow();
+	public <R extends DN00IsDENAObjectWithIDRef<O,I>> M delete(final R ref) {
+		if (ref == null || ref.containsNeitherOidNorId()) throw new IllegalArgumentException("A ref with either an oid or an id is required");
+		
+		M outDeleted = null;
+		if (ref.containsOid()) {
+			outDeleted = this.delete(ref.getOid());
+		} else if (ref.containsId()) {
+			outDeleted = this.deleteById(ref.getId());
+		}
+		return outDeleted;
+	}
+	/**
+	 * Checks if the object exists by reference
+	 * @param ref
+	 * @return
+	 */
+	public <R extends DN00IsDENAObjectWithIDRef<O,I>> boolean exists(final R ref) {
+		if (ref == null || ref.containsNeitherOidNorId()) throw new IllegalArgumentException("A ref with either an oid or an id is required");
+		
+		boolean outExists = false;
+		if (ref.containsOid()) {
+			outExists = this.exists(ref.getOid());
+		} else if (ref.containsId()) {
+			outExists = this.exists(ref.getId());
+		}
+		return outExists;
 	}
 }

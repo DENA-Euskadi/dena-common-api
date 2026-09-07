@@ -3,6 +3,7 @@ package dena.api.common.model.refs;
 import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAPersistableObjectID;
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
 import r01f.facets.HasID;
+import r01f.util.types.Objects;
 
 public interface DN00IsDENAObjectWithIDRef<O extends DN00IsDENAPersistableObjectOID,I extends DN00IsDENAPersistableObjectID<O>> 
 		 extends DN00IsDENAObjectRef<O>,
@@ -10,8 +11,32 @@ public interface DN00IsDENAObjectWithIDRef<O extends DN00IsDENAPersistableObject
 /////////////////////////////////////////////////////////////////////////////////////////
 //	
 /////////////////////////////////////////////////////////////////////////////////////////
-	public default boolean is(final I other) {
-		return this.getId() != null && this.getId().is(other);
+	public default boolean is(final DN00IsDENAObjectWithIDRef<O,I> other) {
+		if (this == other) return true;
+		if (other == null) return false;
+		if (this.getClass() != other.getClass()) return false;
+		
+		boolean oidEqs = Objects.areEqual(this.getOid(),other.getOid(),
+										  (oid1,oid2) -> oid1.is(oid2));
+		boolean idEqs = Objects.areEqual(this.getId(),other.getId(),
+										 (id1,id2) -> id1.is(id2));
+		return oidEqs && idEqs;
+	}
+	public default boolean isNOT(final DN00IsDENAObjectWithIDRef<O,I> other) {
+		return !this.is(other);
+	}
+	public default boolean matchesId(final I id) {
+		return this.getId() != null 
+			&& this.getId().is(id);
+	}
+	public default boolean matchesOidOrId(final DN00IsDENAObjectWithIDRef<O,I> other) {
+		if (this == other) return true;
+		if (other == null) return false;
+		if (this.getClass() != other.getClass()) return false;
+		
+		if (this.getOid() != null && other.getOid() != null) return this.getOid().is(other.getOid());
+		if (this.getId() != null && other.getId() != null) return this.getId().is(other.getId());
+		return false;
 	}
 /////////////////////////////////////////////////////////////////////////////////////////
 //	
@@ -19,6 +44,10 @@ public interface DN00IsDENAObjectWithIDRef<O extends DN00IsDENAPersistableObject
 	public default boolean containsBothOidAndId() {
 		return this.getOid() != null 
 			&& this.getId() != null;
+	}
+	public default boolean containsJustOneOfOidOrId() {
+		return (this.getOid() != null && this.getId() == null) 
+			|| (this.getOid() == null && this.getId() != null);
 	}
 	public default boolean containsAnyOidOrId() {
 		return this.getOid() != null 

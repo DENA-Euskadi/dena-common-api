@@ -26,6 +26,9 @@ public abstract class DN00DENAObjectRefBase<O extends DN00IsDENAPersistableObjec
     public DN00DENAObjectRefBase() {
 		// default no-args constructor
 	}
+    public <R extends DN00DENAObjectRefBase<O>> DN00DENAObjectRefBase(final R other) {
+    	_oid = other.getOid();
+    }
     public DN00DENAObjectRefBase(final O oid) {
 		_oid = oid;
 	}

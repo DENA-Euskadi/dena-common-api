@@ -61,7 +61,8 @@ public class DN00CommonBootstrapGuiceModule
 	private SecurityContext _provideSecurityContext() {
 		return _securityContextProvider.get();
 	}
-	@Provides @SecurityContextProviderForSystemUser
+	@Provides 
+	@SecurityContextProviderForSystemUser
 	private SecurityContext _provideSystemSecurityContext() {
 		return _systemSecurityContextProvider.get();
 	}

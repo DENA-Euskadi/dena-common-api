@@ -4,7 +4,6 @@ import dena.api.common.model.config.DN00DENAConfigIDs.DN00IsDENAConfigObjectID;
 import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAPersistableObjectID;
 import dena.api.common.model.oids.audit.DN00AuditRegistryOIDs.DN00IsAuditRegistryPersistableObjectOID;
 import lombok.NoArgsConstructor;
-import r01f.objectstreamer.annotations.MarshallType;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public abstract class DN00AuditRegistryIDs {
@@ -23,19 +22,25 @@ public abstract class DN00AuditRegistryIDs {
 /////////////////////////////////////////////////////////////////////////////////////////
 //	Audit Registry IDs
 /////////////////////////////////////////////////////////////////////////////////////////
-	@MarshallType(as="traceId")
-	public record DN00TraceID(String id)
-	   implements DN00IsAuditRegistryObjectID {
-
-        public static DN00TraceID forId(final String id) {
-            return new DN00TraceID(id);
-        }
-        public static DN00TraceID valueOf(final String str) {
-            return new DN00TraceID(str);
-        }
-        @Override
-		public String toString() {
-			return this.id;
-		}
-	}
+//	@MarshallType(as="auditEventId")
+//	public record DN00AuditEventID(String id)
+//	   implements DN00IsAuditRegistryObjectID {
+//
+//        public static DN00AuditEventID from(final DN00InteropMessageType messageType) {
+//			return DN00AuditEventID.forId(messageType.name());
+//		}
+//		public static DN00AuditEventID forId(final String id) {
+//            return new DN00AuditEventID(id);
+//        }
+//        public static DN00AuditEventID valueOf(final String str) {
+//            return new DN00AuditEventID(str);
+//        }
+//        public static DN00AuditEventID fromString(final String str) {
+//			return new DN00AuditEventID(str);
+//		}
+//        @Override
+//		public String toString() {
+//			return this.id;
+//		}
+//	}
 }

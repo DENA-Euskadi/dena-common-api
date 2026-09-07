@@ -3,7 +3,11 @@ package dena.api.common.model.oids.security;
 import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAObjectID;
 import dena.api.common.model.oids.DN00CommonIDs.DN00IsDENAPersistableObjectID;
 import dena.api.common.model.oids.security.DN00SecurityOIDs.DN00IsSecurityPersistableObjectOID;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
+import r01f.enums.EnumWithCode;
 import r01f.objectstreamer.annotations.MarshallType;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
@@ -70,5 +74,27 @@ public abstract class DN00SecurityIDs {
 		public String toString() {
         	return this.asString();
         }
+	}
+/////////////////////////////////////////////////////////////////////////////////////////
+//	CLIENT INSTALLMENT
+/////////////////////////////////////////////////////////////////////////////////////////	
+	@Accessors(prefix="_")
+	@RequiredArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+	public enum DN00ClientInstallmentStartupErrorCode
+	 implements EnumWithCode<Integer,DN00ClientInstallmentStartupErrorCode> {
+        CLIENT_INSTALLMENT_OID_NOT_FOUND(100),
+        CLIENT_INSTALLMENT_COULD_NOT_BE_CREATED(101),
+        CLIENT_INSTALLMENT_COULD_NOT_BE_UPDATED(102),
+        
+        CLIENT_APP_VERSION_NOT_FOUND(200),
+        CLIENT_APP_VERSION_ERROR(201),
+        
+        PERSON_NOT_FOUND(300),
+        PERSON_NOT_MATCHING(301),
+     
+        UNKNOWN_ERROR(-1);
+
+		@Getter private final Class<Integer> _codeType = Integer.class;
+		@Getter private final Integer _code;
 	}
 }

@@ -3,6 +3,7 @@ package dena.api.common.model.oids;
 import dena.api.common.model.oids.DN00CommonOIDs.DN00IsDENAPersistableObjectOID;
 import lombok.NoArgsConstructor;
 import r01f.guids.OID;
+import r01f.guids.PersistableObjectID;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public abstract class DN00CommonIDs {
@@ -20,7 +21,8 @@ public abstract class DN00CommonIDs {
 		}
 	}
 	public interface DN00IsDENAPersistableObjectID<O extends DN00IsDENAPersistableObjectOID>
-		     extends DN00IsDENAObjectID {
+		     extends PersistableObjectID<O>,
+		     		 DN00IsDENAObjectID {
 		/* a marker interface */
 	}
 }

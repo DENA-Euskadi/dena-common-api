@@ -1,6 +1,7 @@
 package dena.api.common.context;
 
 import jakarta.inject.Provider;
+import r01f.guids.CommonOIDs.TenantID;
 import r01f.model.security.context.SecurityContextProviderForSystemUserBase;
 import r01f.securitycontext.SecurityContext;
 
@@ -14,14 +15,17 @@ public class DN00SecurityContextProviderForSystemUser
 //	CONSTRUCTOR
 /////////////////////////////////////////////////////////////////////////////////////////
 	public DN00SecurityContextProviderForSystemUser() {
-		// TODO use any kind of token to prevent the creation of this security token from unlegitimate parts
-		super(DN00SecurityContext.forSystemUser());
+		
+		super(DN00SecurityContext.forSystemUser()); // TODO use any kind of token to prevent the creation of this security token from unlegitimate parts
 	}
 /////////////////////////////////////////////////////////////////////////////////////////
 //  GET
 /////////////////////////////////////////////////////////////////////////////////////////
+	
 	@Override
-	public SecurityContext get() {
-		return super.provideValue();
+	public DN00SecurityContext get() {
+		DN00SecurityContext outCtx = DN00SecurityContext.forSystemUser();
+		outCtx.setTenantId(TenantID.DEFAULT);
+		return outCtx;
 	}
 }
